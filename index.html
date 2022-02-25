@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Knuxfan's Spelling Bee</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <span hidden><object data="words.txt" id="wordlist"></object></span>
+
+</head>
+<body onload="load()">
+    <audio src="correct.wav" id="correct"></audio>
+    <audio src="wrong.wav" id="wrong"></audio>
+    <h1 id="title">Knuxfan's Spelling Bee</h1>
+    <div id="titlescreen">
+        <div class="formdiv">
+            <div style="  display: inline;">
+                <label>Start:    </label>
+                <input type="number" id="startnum" value="0" min="0" onchange="
+                document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
+                document.getElementById('finishnum').min = document.getElementById('startnum').value;
+                document.getElementById('finishnum').value = document.getElementById('startnum').value;
+                document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value]
+                " style="width: 25%">
+                <label id="startword"></label>
+            </div><br>
+            <div style="  display: inline;">
+                <label>Finish:  </label>
+                <input type="number" id="finishnum" value="0" min="0" onchange="
+                document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value]
+                document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
+                " style="width: 25%">
+                <label id="finishword"></label>
+            </div>
+            <button type="button" onclick="play()" class="formbutt">Play</button>
+        </div><br><br>
+        <div class="formdiv" >
+            <h3>Previous Score: <span id="prevscore">0</span></h3>
+            <div id="tablespot"></div>
+        </div>
+    </div>
+    <div id="game">
+    <div id="overlay">
+        <div class="text" id="congrat">Close!</div>
+        <div class="subtext">You were <span id="accuracy">94</span>% accurate in the spelling.</div><br>
+        <div class="subtext">Word was:</div><br>
+        <div class="text" id="wordwass">Pinecone</div><br>
+        <div class="subtext">You spelled:</div><br>
+        <div class="text" id="youtyped">Pimecon</div><br>
+        <button class="winbut" onclick="off()" >Submit</button>
+
+
+    </div>
+    <div class="formdiv">
+        <h2>Words Remaining</h2>
+        <h1 id="rem"></h1>
+        <h3>Current Words: <span id="wordright">0</span></h3>
+        <h3>Incorrect Words: <span id="wordwrong">0</span></h3>
+        <h3>Score: <span id="score">0</span></h3>
+        <button type="button" onclick="speakcurrentword()" class="formbutt">Repeat Word</button>
+    </div><br><br>
+    <div class="formdiv">
+        <label>Input Word</label><br>
+        <input id="enter" placeholder="Guess a spelling.." spellcheck="false">
+        <button type="button" onclick="on()" class="formbutt">Submit</button>
+    </div><br><br>
+        <div class="formdiv">
+            <button type="button" onclick="end()" class="redbutt">End Game</button>
+        </div><br><br>
+    </div>
+</body>
+</html>
