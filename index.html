@@ -5,7 +5,7 @@
     <title>Knuxfan's Spelling Bee</title>
     <script src="main.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <span hidden><object data="words.txt" id="wordlist"></object></span>
+    <span hidden><object data="words.txt" id="wordlist" type="text/text"></object></span>
 
 </head>
 <body onload="load()">
@@ -20,21 +20,31 @@
                 document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
                 document.getElementById('finishnum').min = document.getElementById('startnum').value;
                 document.getElementById('finishnum').value = document.getElementById('startnum').value;
-                document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value]
+                document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value];
                 " style="width: 25%">
+
                 <label id="startword"></label>
+                <select id="voices" style="width: 25%">
+                    <option value="0">Default</option>
+                </select>
+                <button type="button" onclick="test()" class="formbutt" style="width: 15%">Test/Refresh Voices</button>
             </div><br>
             <div style="  display: inline;">
                 <label>Finish:  </label>
                 <input type="number" id="finishnum" value="0" min="0" onchange="
                 document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value]
                 document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
-                " style="width: 25%">
+                " style="width: 25%; left: 50%">
                 <label id="finishword"></label>
             </div>
             <button type="button" onclick="play()" class="formbutt">Play</button>
         </div><br><br>
         <div class="formdiv" >
+            <button onclick= "
+        tempscores = []
+        localStorage.setItem('scores', JSON.stringify(tempscores));
+        update()
+" class="formbutt" style="width: 25%">Clear High Scores</button>
             <h3>Previous Score: <span id="prevscore">0</span></h3>
             <div id="tablespot"></div>
         </div>
@@ -47,7 +57,7 @@
         <div class="text" id="wordwass">Pinecone</div><br>
         <div class="subtext">You spelled:</div><br>
         <div class="text" id="youtyped">Pimecon</div><br>
-        <button class="winbut" onclick="off()" >Submit</button>
+        <button class="winbut" onclick="off() " style="width: 25%; left: 37.5%; margin: auto" >Continue</button>
 
 
     </div>

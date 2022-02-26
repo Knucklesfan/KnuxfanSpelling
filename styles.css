@@ -1,5 +1,12 @@
+@font-face {
+    font-family: Avant;
+    src: url(AvantGardeLT-Medium.otf);
+}
+
+
+
 body {
-    font-family: "AvantGarde LT Medium", "Courier New", monospace;
+    font-family: Avant, monospace;
 }
 input, select {
     width: 100%;
@@ -93,7 +100,7 @@ div[class="formdiv"] {
 .text{
     position: relative;
     text-align: center;
-    font-family: "AvantGarde LT Medium", "Courier New", monospace;
+    font-family: Avant, monospace;
 
     top: 25%;
     left: 50%;
@@ -105,7 +112,7 @@ div[class="formdiv"] {
 
 }
 .subtext{
-    font-family: "AvantGarde LT Medium", "Courier New", monospace;
+    font-family: Avant, monospace;
     position: relative;
     top: 25%;
     left: 50%;
@@ -142,7 +149,7 @@ div[class="formdiv"] {
 }
 
 h2,button {
-    font-family: "AvantGarde LT Medium", "Courier New", monospace;
+    font-family: Avant, monospace;
     text-align: center;
 }
 

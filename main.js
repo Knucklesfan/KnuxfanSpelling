@@ -8,16 +8,33 @@ function speakcurrentword() {
     if ('speechSynthesis' in window) {
         var msg = new SpeechSynthesisUtterance();
         msg.text = words[currentword];
+        msg.voice = window.speechSynthesis.getVoices()[document.getElementById('voices').options[parseInt(document.getElementById('voices').selectedIndex)].value];
         window.speechSynthesis.speak(msg);
+        var voices = window.speechSynthesis.getVoices();
+        console.log(voices)
+
     }else{
         alert("Sorry, your browser doesn't support text to speech!");
     }
 }
-
+function test() {
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = 'hello world';
+    msg.voice = window.speechSynthesis.getVoices()[document.getElementById('voices').options[parseInt(document.getElementById('voices').selectedIndex)].value];
+    window.speechSynthesis.speak(msg);
+    update()
+}
 function on() {
+    var youtyped = document.getElementById("enter").value;
+    youtyped.replaceAll("/[^A-Za-z0-9]/g","");
+    youtyped.replaceAll(" ","")
+    console.log(youtyped.length + " " + words[currentword].length)
+    for(var i = 0; i < words[currentword].length; i++) {
+        console.log(words[currentword].charCodeAt(i) + " " + i);
+    }
     document.getElementById("wordwass").innerText = words[currentword];
-    document.getElementById("youtyped").innerText = document.getElementById("enter").value;
-    var perecent = calculatepercent(document.getElementById("enter").value,words[currentword]);
+    document.getElementById("youtyped").innerText = youtyped;
+    var perecent = calculatepercent(youtyped,words[currentword]);
     document.getElementById("accuracy").innerText = perecent;
     var congrat;
     if(perecent <= 25) {
@@ -100,6 +117,9 @@ function load() {
         .then(response => response.text())
         .then(text => {
             words = text.split("\n");
+            for(var i = 0; i < words.length; i++) {
+                words[i] = words[i].replace(/(\r\n|\n|\r)/gm, "");
+            }
             document.getElementById("rem").innerText = maxword-currentword;
             document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value]
             document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
@@ -109,12 +129,32 @@ function load() {
         })
 }
 function update() {
+    console.log("RUNNING")
+
     document.getElementById("prevscore").innerText = localStorage.getItem("lastscore");
+
+    var voices = window.speechSynthesis.getVoices();
+    for(var i = 0; i < voices.length; i++) {
+        var el = document.createElement("option");
+        el.value = i;
+        el.innerText = voices[i].name;
+        document.getElementById("voices").append(el);
+    }
+
     gentable();
 }
 function play() {
+    scores = 0;
+    currentword = 0;
+    correctwords = 0;
+    incorrectwords = 0;
     currentword = document.getElementById('startnum').value;
     maxword = document.getElementById('finishnum').value;
+    document.getElementById("wordright").innerText = correctwords;
+    document.getElementById("wordwrong").innerText = incorrectwords;
+    document.getElementById("score").innerText = scores;
+    document.getElementById("rem").innerText = maxword-currentword;
+
     document.getElementById("titlescreen").style.display = "none";
     document.getElementById("game").style.display = "inline";
 
@@ -131,11 +171,19 @@ function gentable() {
     if(!storedNames) {
         storedNames = [];
     }
-    storedNames.sort().reverse();
+    var nums = [];
     storedNames.forEach(score => {
+        nums.push(parseInt(score));
+    });
+    nums = nums.sort(function(a, b) {
+        return a - b;
+    }).reverse();
+    nums.forEach(score => {
+
         let row = table.insertRow().insertCell().textContent = score;
     });
     table.id = "datable";
     document.getElementById("tablespot").append(table);
+
 
 }
