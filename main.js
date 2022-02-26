@@ -32,9 +32,9 @@ function on() {
     for(var i = 0; i < words[currentword].length; i++) {
         console.log(words[currentword].charCodeAt(i) + " " + i);
     }
-    document.getElementById("wordwass").innerText = words[currentword];
-    document.getElementById("youtyped").innerText = youtyped;
-    var perecent = calculatepercent(youtyped,words[currentword]);
+    document.getElementById("wordwass").innerText = words[currentword].toLowerCase();
+    document.getElementById("youtyped").innerText = youtyped.toLowerCase();
+    var perecent = calculatepercent(youtyped.toLowerCase(),words[currentword].toLowerCase());
     document.getElementById("accuracy").innerText = perecent;
     var congrat;
     if(perecent <= 25) {
