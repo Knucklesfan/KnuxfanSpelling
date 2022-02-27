@@ -15,6 +15,7 @@
     <div id="titlescreen">
         <div class="formdiv">
             <div style="  display: inline;">
+                <div style="margin:auto;left:0; width: 50%; display:inline; float: left;">
                 <label>Start:    </label>
                 <input type="number" id="startnum" value="0" min="0" onchange="
                 document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
@@ -24,18 +25,34 @@
                 " style="width: 25%">
 
                 <label id="startword"></label>
-                <select id="voices" style="width: 25%">
+                </div>
+                <div style="margin:auto;right:0; width: 50%; display:inline; float: left;">
+                <select id="voices" style="width:50%">
                     <option value="0">Default</option>
                 </select>
-                <button type="button" onclick="test()" class="formbutt" style="width: 15%">Test/Refresh Voices</button>
+                <button type="button" onclick="test()" class="formbutt" style="width:25%">Test/Refresh Voices</button>
+                </div>
             </div><br>
             <div style="  display: inline;">
-                <label>Finish:  </label>
-                <input type="number" id="finishnum" value="0" min="0" onchange="
-                document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value]
-                document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
-                " style="width: 25%; left: 50%">
-                <label id="finishword"></label>
+                <div style="margin:auto;left:0; width: 50%; display:inline; float: left;">
+                    <label>Finish:  </label>
+                    <input type="number" id="finishnum" value="0" min="0" onchange="
+                    document.getElementById('finishword').innerText = words[document.getElementById('finishnum').value]
+                    document.getElementById('startword').innerText = words[document.getElementById('startnum').value];
+                    " style="width: 25%; left: 50%">
+                    <label id="finishword"></label>
+                </div>
+                <div style="margin:auto;right:0; width: 50%; display:inline; float: right;">
+                    <select id="wordlists" style="width:50%" onchange="load()">
+                        <option value="words.txt">UIL Spelling 2022 (Hard)</option>
+                        <option value="middlewords.txt">UIL Spelling JH 2022 (Medium)</option>
+                        <option value="animals.txt">Animal names (Easy)</option>
+                    </select>
+                    <label class="container">Randomize
+                        <input type="checkbox" id="randomize" onclick="load()">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
             </div>
             <button type="button" onclick="play()" class="formbutt">Play</button>
         </div><br><br>
@@ -46,7 +63,17 @@
         update()
 " class="formbutt" style="width: 25%">Clear High Scores</button>
             <h3>Previous Score: <span id="prevscore">0</span></h3>
-            <div id="tablespot"></div>
+            <div id="tablespot" style="height:240px;overflow:auto"></div>
+        </div>
+        <div id="notification">
+            <hr align=left style="width:50%;"><p style="font-size: 0.75vw;">Achievement Get!</p><hr style="width:50%;" align=left>
+            <p id="notificationbody" style="font-size: 1vw;">Get a high score of 50 or more.</p>
+            <p id="notificationgoal" style="font-size: 1.5vw;">Unlocked new theme!</p>
+            <button style="right: 8px; top: 8px; position:absolute; border-color: transparent; background-color: transparent; border-style: solid;   color: transparent;  text-shadow: 0 0 0 #45a049; cursor: pointer"
+            onclick="
+                document.getElementById('overlay').style.display = 'none';">❌</button>
+
+
         </div>
     </div>
     <div id="game">
@@ -57,7 +84,12 @@
         <div class="text" id="wordwass">Pinecone</div><br>
         <div class="subtext">You spelled:</div><br>
         <div class="text" id="youtyped">Pimecon</div><br>
-        <button class="winbut" onclick="off() " style="width: 25%; left: 37.5%; margin: auto" >Continue</button>
+        <button class="winbut" onclick="off() " style="width: 25%; left: 37.5%; margin: auto" >Continue</button><br><br>
+        <div class="subtext">Definition:</div><br>
+        <div class="smalltext" id="definition"></div><br>
+        <div class="subtext">Learn more!</div>
+        <div class="smalltext" id="link"></div><br>
+
 
 
     </div>
